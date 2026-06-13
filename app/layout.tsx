@@ -1,8 +1,8 @@
-import './globals.css';
+ import './globals.css';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Bengal Blue DApp Shop',
+  title: 'BlockCart DApp Shop',
   description: 'A trendy decentralized ecommerce homepage with wallet-ready shopping.',
 };
 

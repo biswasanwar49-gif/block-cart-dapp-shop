@@ -1,11 +1,13 @@
 'use client';
 
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import {
   Search,
   ShoppingBag,
   Heart,
   Wallet,
+  UserCircle,
   PackageOpen,
   ShieldCheck,
   Repeat,
@@ -97,7 +99,7 @@ export default function Home() {
     <main className="min-h-screen overflow-hidden">
       <div className="bg-white/90 border-b border-slate-200">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 text-sm text-slate-600 sm:px-6 lg:px-8">
-          <p className="font-medium text-slate-800">Bengal Blue DApp:</p>
+          <p className="font-medium text-slate-800">BlockCart DApp:</p>
           <div className="flex gap-4">
             {topOffers.map((offer) => (
               <span key={offer}>{offer}</span>
@@ -113,23 +115,28 @@ export default function Home() {
               <span className="font-bold">BB</span>
             </div>
             <div>
-              <p className="text-sm font-semibold text-bengal-blue">Bengal Blue</p>
+              <p className="text-sm font-semibold text-bengal-blue">BlockCart</p>
               <p className="text-xs text-slate-500">Decentralized commerce</p>
             </div>
           </div>
 
           <nav className="hidden items-center gap-8 text-sm font-medium text-slate-700 md:flex">
             <a href="#home" className="transition hover:text-bengal-blue">Home</a>
-            <a href="#products" className="transition hover:text-bengal-blue">Products</a>
+            <Link href="/shop" className="transition hover:text-bengal-blue">Shop</Link>
+            <Link href="/dashboard" className="transition hover:text-bengal-blue">Dashboard</Link>
             <a href="#categories" className="transition hover:text-bengal-blue">Categories</a>
-            <a href="#about" className="transition hover:text-bengal-blue">About</a>
-            <a href="#contact" className="transition hover:text-bengal-blue">Contact</a>
+            <Link href="/about" className="transition hover:text-bengal-blue">About</Link>
+            <Link href="/contact" className="transition hover:text-bengal-blue">Contact</Link>
           </nav>
 
           <div className="flex items-center gap-3">
-            <button className="hidden rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-bengal-blue hover:text-bengal-blue md:inline-flex">
+            <Link href="/admin" className="hidden rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-bengal-blue hover:text-bengal-blue md:inline-flex">
               Admin Panel
-            </button>
+            </Link>
+            <Link href="/account" className="hidden items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-bengal-blue hover:text-bengal-blue md:inline-flex">
+              <UserCircle className="h-4 w-4" />
+              My Account
+            </Link>
             <button className="inline-flex items-center gap-2 rounded-full bg-bengal-blue px-4 py-2 text-sm font-semibold text-white shadow-soft transition hover:bg-bengal-blue-soft">
               <Wallet className="h-4 w-4" />
               Connect Wallet
@@ -150,16 +157,16 @@ export default function Home() {
               Shop smart with a modern DApp storefront powered by wallet, tracking, and product intelligence.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-              A Bengal Blue homepage crafted for discovery, fast checkout, product filtering, reviews, and a sleek admin experience for managing stock, returns, and delivery.
+              A BlockCart homepage crafted for discovery, fast checkout, product filtering, reviews, and a sleek admin experience for managing stock, returns, and delivery.
             </p>
 
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-              <a href="#products" className="inline-flex items-center justify-center rounded-full bg-bengal-blue px-6 py-3 text-base font-semibold text-white shadow-soft transition hover:bg-bengal-blue-soft">
-                Explore products
-              </a>
-              <a href="#about" className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-3 text-base font-semibold text-slate-700 transition hover:border-bengal-blue hover:text-bengal-blue">
-                Learn more
-              </a>
+                <Link href="/shop" className="inline-flex items-center justify-center rounded-full bg-bengal-blue px-6 py-3 text-base font-semibold text-white shadow-soft transition hover:bg-bengal-blue-soft">
+                  Explore products
+                </Link>
+                <Link href="/about" className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-3 text-base font-semibold text-slate-700 transition hover:border-bengal-blue hover:text-bengal-blue">
+                  Learn more
+                </Link>
             </div>
 
             <div className="mt-10 grid gap-4 sm:grid-cols-3">
@@ -434,7 +441,7 @@ export default function Home() {
       <footer id="contact" className="bg-bengal-blue text-white">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:px-8 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
           <div>
-            <h3 className="text-2xl font-semibold">Bengal Blue DApp</h3>
+            <h3 className="text-2xl font-semibold">BlockCart DApp</h3>
             <p className="mt-4 max-w-xl text-sm leading-7 text-slate-200">
               Trendy ecommerce design built for wallet integration, product browsing, delivery tracking, and admin management.
             </p>
@@ -442,10 +449,10 @@ export default function Home() {
           <div>
             <p className="text-sm uppercase tracking-[0.24em] text-slate-300">Quick links</p>
             <ul className="mt-6 space-y-3 text-sm text-slate-200">
-              <li><a href="#products" className="transition hover:text-white">Products</a></li>
+              <li><Link href="/shop" className="transition hover:text-white">Shop</Link></li>
               <li><a href="#categories" className="transition hover:text-white">Categories</a></li>
-              <li><a href="#about" className="transition hover:text-white">About</a></li>
-              <li><a href="#contact" className="transition hover:text-white">Contact</a></li>
+              <li><Link href="/about" className="transition hover:text-white">About</Link></li>
+              <li><Link href="/contact" className="transition hover:text-white">Contact</Link></li>
             </ul>
           </div>
           <div>
@@ -457,7 +464,7 @@ export default function Home() {
           </div>
         </div>
         <div className="border-t border-white/10 px-4 py-6 text-center text-sm text-slate-300 sm:px-6 lg:px-8">
-          © 2026 Bengal Blue. Designed for a modern decentralized ecommerce experience.
+          © 2026 BlockCart. Designed for a modern decentralized ecommerce experience.
         </div>
       </footer>
     </main>
