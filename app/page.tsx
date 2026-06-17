@@ -97,8 +97,9 @@ const featureList = [
 export default function Home() {
 const [walletAddress, setWalletAddress] = useState<string>("");
   
-// ওয়ালেট কানেক্ট করার মূল ফাংশন
+// Wallet connection function using MetaMask
   const connectWallet = async () => {
+   
     if (typeof window !== 'undefined' && (window as any).ethereum) {
       try {
         const accounts = await (window as any).ethereum.request({
@@ -110,14 +111,32 @@ const [walletAddress, setWalletAddress] = useState<string>("");
           alert("Wallet connected!");
         }
       } catch (error) {
-        console.error("ইউজার কানেক্ট রিকোয়েস্ট রিজেক্ট করেছেন", error);
+        console.error("Error connecting wallet:", error);
       }
     } else {
-      alert("মেটামাস্ক ইনস্টল করুন অথবা ওয়ালেট সাপোর্টেড ব্রাউজার ব্যবহার করুন!");
+      alert("MetaMask is not installed. Please install it to connect your wallet.");
+    }
+  };
+  const ADMIN_WALLET = "0x1db939527fe4870f7d5c9dd5da26b01b2f0eb92d".toLowerCase();
+
+  const handleAdminClick = () => {
+    // 1. Check if the wallet is connected by verifying if walletAddress state has a value. If not, it prompts the user to connect their MetaMask wallet first.
+    if (!walletAddress) {
+      alert("❌ Please connect your MetaMask wallet first!");
+      return;
+    }
+
+    // 2. Compare walletAddress with the predefined ADMIN_WALLET address
+    if (walletAddress.toLowerCase() === ADMIN_WALLET) {
+      // if it matches, it allows access to the admin panel
+      window.location.href = '/admin'; 
+    } else {
+      // if it doesn't match, it shows an access denied message
+      alert("🔒 Access Denied! You are not an authorized admin of this site.");
     }
   };
 
-  // ওয়ালেট ডিসকানেক্ট বা রিমুভ করার ফাংশন
+  // Disconnect wallet function
   const disconnectWallet = () => {
     setWalletAddress("");
     alert("Wallet is now disconnected.");
@@ -161,9 +180,13 @@ const [walletAddress, setWalletAddress] = useState<string>("");
           </nav>
 
           <div className="flex items-center gap-3">
-            <Link href="/admin" className="hidden rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-blue-600 hover:text-blue-600 md:inline-flex">
-              Admin Panel
-            </Link>
+  {/* 🔒 admin panel link */}
+  <button 
+    onClick={handleAdminClick} 
+    className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition"
+  >
+    Admin Panel
+  </button>
             <Link href="/account" className="hidden items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-blue-600 hover:text-blue-600 md:inline-flex">
               <UserCircle className="h-4 w-4" />
               My Account
